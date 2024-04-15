@@ -1,48 +1,56 @@
-let operand = 0;
-let currentValue = 0;
-let selectedOperation = null;
-let equalbtn = false;
+class CalculatorController {
+    constructor(model, view) {
+        this.model = model;
+        this.view = view;
 
-numberButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        const digit = button.textContent;
-        displayField.value += digit;
-        currentValue = parseFloat(displayField.value);
-    });
-});
+        this.view.bindNumberButtonClick(this.handleNumberButtonClick);
+        this.view.bindOperationButtonClick(this.handleOperationButtonClick);
+        this.view.bindClearButtonClick(this.handleClearButtonClick);
+        this.view.bindEqualsButtonClick(this.handleEqualsButtonClick);
+    }
 
-operationButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        if(selectedOperation != null) {
-            if (!equalbtn) {
-                currentValue = parseFloat(displayField.value);
-                operand = performOperation(operand, currentValue, selectedOperation);
-                selectedOperation = button.textContent;
-            }
-            else {
-                currentValue = parseFloat(displayField.value);
-                selectedOperation = button.textContent;
-                operand = currentValue;
-            }
+    handleNumberButtonClick = digit => {
+        if (this.model.selectedOperation || this.model.currentValue === 0) {
+            this.model.currentValue = parseFloat(digit);
+        } else {
+            this.model.currentValue = this.model.currentValue * 10 + parseFloat(digit);
         }
-        else {
-            selectedOperation = button.textContent;
-            operand = currentValue;
+        this.view.updateDisplay(this.model.currentValue);
+    };
+
+    handleOperationButtonClick = operation => {
+        if (this.model.selectedOperation != null) {
+            if (!this.model.equalbtn) {
+                this.model.currentValue = parseFloat(this.view.displayField.value);
+                this.model.operand = this.model.performOperation(this.model.operand, this.model.currentValue, this.model.selectedOperation);
+                this.model.selectedOperation = operation;
+            } else {
+                this.model.currentValue = parseFloat(this.view.displayField.value);
+                this.model.selectedOperation = operation;
+                this.model.operand = this.model.currentValue;
+            }
+        } else {
+            this.model.selectedOperation = operation;
+            this.model.operand = this.model.currentValue;
         }
-        displayField.value = '';
-        equalbtn=false;
-    });
-});
+        this.view.updateDisplay('');
+        this.model.equalbtn = false;
+    };
 
-clearButton.addEventListener('click', () => {
-    displayField.value = '';
-    currentValue = 0;
-    operand = 0;
-    selectedOperation = null;
-});
+    handleClearButtonClick = () => {
+        this.view.updateDisplay('');
+        this.model.currentValue = 0;
+        this.model.operand = 0;
+        this.model.selectedOperation = null;
+    };
 
-equalsButton.addEventListener('click', () => {
-    operand = performOperation(operand, currentValue, selectedOperation);
-    displayField.value = operand;
-    equalbtn=true;
-});
+    handleEqualsButtonClick = () => {
+        this.model.operand = this.model.performOperation(this.model.operand, this.model.currentValue, this.model.selectedOperation);
+        this.view.updateDisplay(this.model.operand);
+        this.model.equalbtn = true;
+    };
+}
+
+const model = new CalculatorModel();
+const view = new CalculatorView();
+const controller = new CalculatorController(model, view);
