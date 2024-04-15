@@ -1,5 +1,5 @@
 ## Бичко Кирило Володимирович
 ## Група КВ-12
-## Розробка статичного інтерфейсу Web-додатка
-### розробити статичні Web-сторінки додатку та перевірити коректне їх відображення на екранах різного розміру.
-## https://docs.google.com/document/d/1brJE6A8U9QY9f7IM629IxMasUGa8vPdkgyBn1kHsANo/edit?usp=sharing
+## Розробка функціональності Web-додатка мовою Javascript
+### розробити функціональність для статичних сторінок Web-додатку першої лабораторної роботи із використанням шаблону MVC
+## https://docs.google.com/document/d/1Pke_rjlwsMQ5lNrIuBMf0N985FLN6wVcth0yvgWNPtA
