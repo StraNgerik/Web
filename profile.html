@@ -70,8 +70,10 @@
     <script> document.addEventListener('DOMContentLoaded', function () {
         const userDataString = localStorage.getItem('userData');
         const userData = JSON.parse(userDataString);
+        const login_flagString = localStorage.getItem('login_flag');
+        const login_flag = JSON.parse(login_flagString);
     
-        if (userData) {
+        if (userData && login_flag) {
             for (const key in userData) {
                 if (userData.hasOwnProperty(key)) {
                     const value = userData[key];
