@@ -58,6 +58,24 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script> document.addEventListener('DOMContentLoaded', function() {
+        const form = document.querySelector('form');
+        const userDataString = localStorage.getItem('userData');
+        const userData = JSON.parse(userDataString);
+    
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+    
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+    
+            if (email === userData.email && password === userData.password) {
+                window.location.href = 'profile.html';
+            } else {
+                alert('Неправильний логін або пароль');
+            }
+        });
+    }); </script>
 </body>
 
 </html>

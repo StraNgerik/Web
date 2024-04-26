@@ -62,8 +62,8 @@
 				<input type="date" class="form-control" id="dob" name="dob">
 			</div>
             <div class="form-group">
-				<label for="email">Пароль:</label>
-				<input type="email" class="form-control" id="password" placeholder="Введіть пароль" name="password">
+				<label for="password">Пароль:</label>
+				<input type="password" class="form-control" id="password" placeholder="Введіть пароль" name="password">
 			</div>
 			<button type="submit" class="btn btn-primary">Зареєструватися</button>
 		</form>
@@ -74,6 +74,36 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script> document.addEventListener('DOMContentLoaded', function() {
+        const form = document.querySelector('form');
+    
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+    
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const gender = document.getElementById('gender').value.trim();
+            const dob = document.getElementById('dob').value.trim();
+            const password = document.getElementById('password').value.trim();
+    
+            if (name === '' || email === '' || gender === '' || dob === '' || password === '') {
+                alert('Будь ласка, заповніть всі поля форми.');
+                return; 
+            }
+    
+            const userData = {
+                name: name,
+                email: email,
+                gender: gender,
+                dob: dob,
+                password: password
+            };
+            localStorage.setItem('userData', JSON.stringify(userData));
+    
+            console.log(userData);
+    
+        });
+    }); </script>
 </body>
 
 </html>

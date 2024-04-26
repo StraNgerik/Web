@@ -37,44 +37,52 @@
         </div>
     </nav>
 
-    <!-- Контент профіля -->
+    <!-- Контент профілю -->
     <div class="container sign-container">
-		<h1>Профіль користувача</h1>
-		<table class="table table-striped">
-			<tbody>
-				<tr>
-					<td>Прізвище:</td>
-					<td>Бичко</td>
-				</tr>
+        <h1>Профіль користувача</h1>
+        <table class="table table-striped" id="profileTable">
+            <tbody>
                 <tr>
-					<td>Ім'я:</td>
-					<td>Кирило</td>
-				</tr>
+                    <td>Ім'я:</td>
+                    <td id="name">Кирило</td>
+                </tr>
                 <tr>
-					<td>Стать:</td>
-					<td>Чоловіча</td>
-				</tr>
+                    <td>Стать:</td>
+                    <td id="gender">Чоловіча</td>
+                </tr>
                 <tr>
-					<td>Дата народження:</td>
-					<td>08.03.2004</td>
-				</tr>
+                    <td>Дата народження:</td>
+                    <td id="dob">08.03.2004</td>
+                </tr>
                 <tr>
-					<td>Місце проживання:</td>
-					<td>Чернігів</td>
-				</tr>
-				<tr>
-					<td>Електронна пошта:</td>
-					<td>super-kera007@gmail.com</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
+                    <td>Електронна пошта:</td>
+                    <td id="email">super-kera007@gmail.com</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
     
 
     
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script> document.addEventListener('DOMContentLoaded', function () {
+        const userDataString = localStorage.getItem('userData');
+        const userData = JSON.parse(userDataString);
+    
+        if (userData) {
+            for (const key in userData) {
+                if (userData.hasOwnProperty(key)) {
+                    const value = userData[key];
+                    const element = document.getElementById(key);
+                    if (element) {
+                        element.textContent = value;
+                    }
+                }
+            }
+        }
+    }); </script>
 </body>
 
 </html>
